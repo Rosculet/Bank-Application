@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "accounts", schema = "bank_security", catalog = "")
+@Table(name = "accounts", schema = "bank_security")
 public class AccountsEntity {
     @Basic
     @Column(name = "customer_id")
