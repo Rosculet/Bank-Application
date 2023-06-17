@@ -3,7 +3,7 @@ package com.example.bank_security.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "authorities", schema = "bank_security", catalog = "")
+@Table(name = "authorities", schema = "bank_security")
 public class AuthoritiesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
