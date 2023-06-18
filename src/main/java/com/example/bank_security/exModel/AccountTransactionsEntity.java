@@ -1,13 +1,12 @@
 package com.example.bank_security.model;
 
 import jakarta.persistence.*;
-
 import java.sql.Date;
 
 @Entity
 @Table(name = "account_transactions", schema = "bank_security")
 public class AccountTransactionsEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
     @Column(name = "transaction_id")
     private String transactionId;
