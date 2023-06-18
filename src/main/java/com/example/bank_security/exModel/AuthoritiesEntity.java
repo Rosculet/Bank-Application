@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "authorities", schema = "bank_security")
 public class AuthoritiesEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     @Column(name = "id")
     private int id;

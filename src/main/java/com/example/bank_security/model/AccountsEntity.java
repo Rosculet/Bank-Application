@@ -1,3 +1,4 @@
+/*
 package com.example.bank_security.model;
 
 import jakarta.persistence.*;
@@ -10,7 +11,7 @@ public class AccountsEntity {
     @Basic
     @Column(name = "customer_id")
     private int customerId;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
     @Column(name = "account_number")
     private int accountNumber;
@@ -91,3 +92,4 @@ public class AccountsEntity {
         return result;
     }
 }
+*/

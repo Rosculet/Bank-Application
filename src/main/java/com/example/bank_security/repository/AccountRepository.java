@@ -1,3 +1,4 @@
+/*
 package com.example.bank_security.repository;
 
 import com.example.bank_security.model.AccountsEntity;
@@ -11,3 +12,4 @@ public interface AccountRepository extends JpaRepository<AccountsEntity, Integer
     AccountsEntity findByCustomerId(int customerId);
 
 }
+*/

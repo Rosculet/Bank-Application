@@ -1,13 +1,17 @@
 package com.example.bank_security.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.sql.Date;
 
 @Entity
 @Table(name = "notice_details", schema = "bank_security")
 public class NoticeDetailsEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native")
     @Id
     @Column(name = "notice_id")
     private int noticeId;

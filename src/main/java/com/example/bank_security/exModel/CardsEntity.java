@@ -7,7 +7,7 @@ import java.sql.Date;
 @Entity
 @Table(name = "cards", schema = "bank_security")
 public class CardsEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     @Column(name = "card_id")
     private int cardId;

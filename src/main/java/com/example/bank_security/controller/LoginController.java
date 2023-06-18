@@ -5,23 +5,31 @@ import com.example.bank_security.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.sql.Date;
 
 @RestController
 public class LoginController {
 
     @Autowired
     CustomerRepository customerRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @PostMapping("/register")
-    public ResponseEntity<String>registerUse(@RequestBody CustomerEntity customer){
+    public ResponseEntity<String>registerUser(@RequestBody CustomerEntity customer){
         CustomerEntity savedCustomer = null;
         ResponseEntity responseEntity = null;
         try {
+            String hashPwd = passwordEncoder.encode(customer.getPwd());
+            customer.setPwd(hashPwd);
+            customer.setCreateDt(new Date(System.currentTimeMillis()));
             savedCustomer = customerRepository.save(customer);
-            if (savedCustomer.getId()>0){
+            if (savedCustomer.getCustomerId()>0){
                 responseEntity = ResponseEntity
                         .status(HttpStatus.CREATED)
                         .body("Given user details are successfully registered");
@@ -29,7 +37,7 @@ public class LoginController {
         } catch (Exception ex) {
             responseEntity = ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("An exception occured due to" + ex.getMessage());
+                    .body("An exception occured due to " + ex.getMessage());
         }
         return responseEntity;
     }
