@@ -36,15 +36,16 @@ public class ProjectSecurityConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 
+        int port = 4200;
         http.cors().configurationSource(request -> {
             CorsConfiguration config = new CorsConfiguration();
-            config.setAllowedOrigins(Collections.singletonList("http:/localhost:4200"));
+            config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
             config.setAllowedMethods(Collections.singletonList("*"));
             config.setAllowCredentials(true);
             config.setAllowedHeaders(Collections.singletonList("*"));
             config.setMaxAge(3600L);
             return config;
-        });
+        }).and().csrf().disable();
 
 
 
