@@ -1,17 +1,21 @@
-package com.example.bank_security.model;
+package com.example.bank_security.model.authorities;
 
+import com.example.bank_security.model.customer.CustomerEntity;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "authorities", schema = "bank_security")
 public class AuthoritiesEntity {
+
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     @Column(name = "id")
     private int id;
-    @Basic
-    @Column(name = "customer_id")
-    private int customerId;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private CustomerEntity customer;
+
     @Basic
     @Column(name = "name")
     private String name;
@@ -24,12 +28,12 @@ public class AuthoritiesEntity {
         this.id = id;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public CustomerEntity getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomer(CustomerEntity customerId) {
+        this.customer = customerId;
     }
 
     public String getName() {
@@ -48,7 +52,7 @@ public class AuthoritiesEntity {
         AuthoritiesEntity that = (AuthoritiesEntity) o;
 
         if (id != that.id) return false;
-        if (customerId != that.customerId) return false;
+        if (customer != that.customer) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
         return true;
@@ -57,7 +61,7 @@ public class AuthoritiesEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + customerId;
+        result = 31 * result + customer.hashCode();
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }

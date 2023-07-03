@@ -1,9 +1,17 @@
-package com.example.bank_security.model;
+package com.example.bank_security.model.customer;
 
+import com.example.bank_security.model.account.AccountEntity;
+import com.example.bank_security.model.authorities.AuthoritiesEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSessionListener;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.sql.Date;
+import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "customer", schema = "bank_security")
@@ -23,7 +31,8 @@ public class CustomerEntity {
     @Basic
     @Column(name = "mobile_number")
     private String mobileNumber;
-    @Basic
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "pwd")
     private String pwd;
     @Basic
@@ -32,6 +41,15 @@ public class CustomerEntity {
     @Basic
     @Column(name = "create_dt")
     private Date createDt;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
+    private Set<AuthoritiesEntity> authorities;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<AccountEntity> accounts;
+
 
     public int getCustomerId() {
         return customerId;
@@ -89,6 +107,14 @@ public class CustomerEntity {
         this.createDt = createDt;
     }
 
+    public Set<AuthoritiesEntity> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<AuthoritiesEntity> authorities) {
+        this.authorities = authorities;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -109,7 +135,7 @@ public class CustomerEntity {
 
     @Override
     public int hashCode() {
-        int result = customerId;
+        int result = 1;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (mobileNumber != null ? mobileNumber.hashCode() : 0);

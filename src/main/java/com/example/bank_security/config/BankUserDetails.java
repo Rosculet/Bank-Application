@@ -2,7 +2,7 @@
 package com.example.bank_security.config;
 
 
-import com.example.bank_security.model.CustomerEntity;
+import com.example.bank_security.model.customer.CustomerEntity;
 import com.example.bank_security.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

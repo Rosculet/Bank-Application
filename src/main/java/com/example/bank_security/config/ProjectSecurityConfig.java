@@ -1,7 +1,6 @@
 package com.example.bank_security.config;
 
 import com.example.bank_security.filter.CsrfCookieFilter;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,10 +15,8 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
 
 
-import java.util.Collection;
 import java.util.Collections;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -55,12 +52,17 @@ public class ProjectSecurityConfig {
             config.setMaxAge(3600L);
             return config;
         }).and().csrf((csrf)->csrf.csrfTokenRequestHandler(requestHandler) //csrf Customizer
-                        .ignoringRequestMatchers("/contact","/register")
+                        .ignoringRequestMatchers("/contact","/register/**","/notices", "/customer/**")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())) //Token saved in Coockie and open for read and write
                 .addFilterAt(new CsrfCookieFilter(), BasicAuthenticationFilter.class) //adding CsrfCookieFilter in Filter Chain after BasicAuthenticationFilter(standart Filter for Auth HTTP Basic Auth)
-                .authorizeHttpRequests(request -> request.requestMatchers("/account", "/loans","balance","/cards")
-                .authenticated()
-                .requestMatchers("/contact","/notices","/register")
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers("/account/**").hasAnyRole("USER")
+                        .requestMatchers("/nothing2").hasAnyRole("USER","ADMIN")
+                        .requestMatchers("/nothing3").hasRole("USER")
+                        .requestMatchers("/nothing4").hasRole("USER")
+                        .requestMatchers("/user")
+                        .authenticated()
+                .requestMatchers("/contact","/notices","/register/**","/customer/**")
                 .permitAll())
                 .formLogin(withDefaults())
                 .httpBasic(withDefaults())
