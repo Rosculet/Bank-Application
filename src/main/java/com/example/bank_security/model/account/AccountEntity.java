@@ -1,16 +1,16 @@
-/*
-package com.example.bank_security.model;
+package com.example.bank_security.model.account;
 
+import com.example.bank_security.model.customer.CustomerEntity;
 import jakarta.persistence.*;
 
 import java.sql.Date;
 
 @Entity
 @Table(name = "accounts", schema = "bank_security")
-public class AccountsEntity {
-    @Basic
-    @Column(name = "customer_id")
-    private int customerId;
+public class AccountEntity {
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private CustomerEntity customer;
 
     @Id
     @Column(name = "account_number")
@@ -25,12 +25,13 @@ public class AccountsEntity {
     @Column(name = "create_dt")
     private Date createDt;
 
-    public int getCustomerId() {
-        return customerId;
+
+    public CustomerEntity getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomer(CustomerEntity customer) {
+        this.customer = customer;
     }
 
     public int getAccountNumber() {
@@ -70,9 +71,9 @@ public class AccountsEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AccountsEntity that = (AccountsEntity) o;
+        AccountEntity that = (AccountEntity) o;
 
-        if (customerId != that.customerId) return false;
+        if (customer != that.customer) return false;
         if (accountNumber != that.accountNumber) return false;
         if (accountType != null ? !accountType.equals(that.accountType) : that.accountType != null) return false;
         if (branchAddress != null ? !branchAddress.equals(that.branchAddress) : that.branchAddress != null)
@@ -84,7 +85,7 @@ public class AccountsEntity {
 
     @Override
     public int hashCode() {
-        int result = customerId;
+        int result = customer.hashCode();
         result = 31 * result + accountNumber;
         result = 31 * result + (accountType != null ? accountType.hashCode() : 0);
         result = 31 * result + (branchAddress != null ? branchAddress.hashCode() : 0);
@@ -92,4 +93,4 @@ public class AccountsEntity {
         return result;
     }
 }
-*/
+

@@ -69,7 +69,7 @@ CREATE TABLE `cards` (
   `create_dt` date DEFAULT NULL,
   PRIMARY KEY (`card_id`),
   KEY `customer_id` (`customer_id`),
-  CONSTRAINT `card_customer_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE
+  CONSTRAINT `card_customer_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`);
 );
 
 CREATE TABLE `notice_details` (
@@ -99,7 +99,7 @@ CREATE TABLE `authorities` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `customer_id` (`customer_id`),
-  CONSTRAINT `authorities_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`)
+  CONSTRAINT `authorities_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE;
 );
 
 
