@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class NoticesController {
 
     @GetMapping("/notices")
-    public String getLoansDetails(){
+    public String getLoansDetails() {
         return "Here are the notices details from DB";
     }
 

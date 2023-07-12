@@ -29,7 +29,7 @@ public class ContactController {
             contactRepository.save(contactMessages);
 
 
-            if (contactMessages.getContactId()>0){
+            if (contactMessages.getContactId() > 0) {
                 responseEntity = ResponseEntity
                         .status(HttpStatus.CREATED)
                         .body("Contact message sent");

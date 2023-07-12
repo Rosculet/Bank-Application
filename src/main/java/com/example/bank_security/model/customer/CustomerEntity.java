@@ -5,21 +5,18 @@ import com.example.bank_security.model.authorities.AuthoritiesEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.HttpSessionListener;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.sql.Date;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "customer", schema = "bank_security")
 public class CustomerEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
-    @GenericGenerator(name = "native",strategy = "native")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     @Column(name = "customer_id")
     private int customerId;
     @Basic

@@ -52,14 +52,14 @@ public class CustomerController {
                     .body("An exception occurred while deleting the user: " + ex.getMessage());
         }
     }
+
     @GetMapping("{id}")
-    public ResponseEntity<CustomerEntity> getCustomer(@PathVariable int id){
+    public ResponseEntity<CustomerEntity> getCustomer(@PathVariable int id) {
         Optional<CustomerEntity> optionalCustomer = customerRepository.findById(id);
         if (optionalCustomer.isPresent()) {
             CustomerEntity customer = optionalCustomer.get();
             return ResponseEntity.ok(customer);
-        }
-        else return ResponseEntity.notFound().build();
+        } else return ResponseEntity.notFound().build();
     }
 
 

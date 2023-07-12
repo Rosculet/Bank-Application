@@ -1,4 +1,3 @@
-
 package com.example.bank_security.model.account;
 
 import com.example.bank_security.model.customer.CustomerEntity;
@@ -27,12 +26,13 @@ public class AccountEntity {
     private Date createDt;
 
 
-
     public CustomerEntity getCustomer() {
-        return customer;}
+        return customer;
+    }
 
     public void setCustomer(CustomerEntity customer) {
-        this.customer = customer;}
+        this.customer = customer;
+    }
 
     public int getAccountNumber() {
         return accountNumber;

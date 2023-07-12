@@ -42,14 +42,14 @@ public class BankUsernamePwdAuthenticationProvider implements AuthenticationProv
 
                 return new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthority(customerEntityList.get(0).getAuthorities()));
             } else {
-                throw new BadCredentialsException("Invalid password"); }
+                throw new BadCredentialsException("Invalid password");
+            }
         } else {
-                throw new BadCredentialsException("No User registered with this details");
+            throw new BadCredentialsException("No User registered with this details");
         }
     }
 
-    private List<GrantedAuthority> getGrantedAuthority(Set<AuthoritiesEntity> authorities)
-    {
+    private List<GrantedAuthority> getGrantedAuthority(Set<AuthoritiesEntity> authorities) {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         for (AuthoritiesEntity authority : authorities) {
             grantedAuthorities.add(new SimpleGrantedAuthority(authority.getName()));
